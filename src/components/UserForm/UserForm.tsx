@@ -28,7 +28,7 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="form-group">
+      <div className="form-group mb-3">
         <label htmlFor="name">Name</label>
         <input
           type="text"
@@ -38,7 +38,7 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
           className="form-control"
         />
       </div>
-      <div className="form-group">
+      <div className="form-group mb-3">
         <label htmlFor="email">Email</label>
         <input
           type="email"
@@ -48,7 +48,7 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
           className="form-control"
         />
       </div>
-      <div className="form-group">
+      <div className="form-group mb-3">
         <label htmlFor="role">Role</label>
         <select
           id="role"
@@ -60,7 +60,7 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
           <option value="student">Student</option>
         </select>
       </div>
-      <div className="form-group form-check">
+      <div className="form-check mb-3">
         <input
           type="checkbox"
           id="active"
@@ -68,11 +68,11 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
           onChange={(e) => setActive(e.target.checked)}
           className="form-check-input"
         />
-        <label className="form-check-label" htmlFor="active">
+        <label htmlFor="active" className="form-check-label">
           Active
         </label>
       </div>
-      <button type="submit" className="btn btn-primary">
+      <button type="submit" className="btn btn-primary w-100">
         Add User
       </button>
     </form>
