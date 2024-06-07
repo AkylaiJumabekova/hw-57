@@ -2,30 +2,40 @@ import React, { useState } from "react";
 import { User } from "../types";
 
 interface UserFormProps {
-  onAddUser: (user: User) => void;
+  onSubmit: (user: User) => void;
 }
 
-const UserForm: React.FC<UserFormProps> = ({ onAddUser }) => {
+const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [role, setRole] = useState<"teacher" | "student">("teacher");
+  const [active, setActive] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onAddUser({ name, email });
+    onSubmit({
+      id: Math.random().toString(),
+      name,
+      email,
+      active,
+      role,
+    });
     setName("");
     setEmail("");
+    setRole("teacher");
+    setActive(false);
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">
-        <label htmlFor="name">Имя</label>
+        <label htmlFor="name">Name</label>
         <input
           type="text"
           id="name"
-          className="form-control"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          className="form-control"
         />
       </div>
       <div className="form-group">
@@ -33,13 +43,37 @@ const UserForm: React.FC<UserFormProps> = ({ onAddUser }) => {
         <input
           type="email"
           id="email"
-          className="form-control"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          className="form-control"
         />
       </div>
-      <button type="submit" className="btn btn-primary mt-3">
-        Добавить пользователя
+      <div className="form-group">
+        <label htmlFor="role">Role</label>
+        <select
+          id="role"
+          value={role}
+          onChange={(e) => setRole(e.target.value as "teacher" | "student")}
+          className="form-control"
+        >
+          <option value="teacher">Teacher</option>
+          <option value="student">Student</option>
+        </select>
+      </div>
+      <div className="form-group form-check">
+        <input
+          type="checkbox"
+          id="active"
+          checked={active}
+          onChange={(e) => setActive(e.target.checked)}
+          className="form-check-input"
+        />
+        <label className="form-check-label" htmlFor="active">
+          Active
+        </label>
+      </div>
+      <button type="submit" className="btn btn-primary">
+        Add User
       </button>
     </form>
   );
